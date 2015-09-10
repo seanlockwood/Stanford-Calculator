@@ -59,6 +59,25 @@ class ViewController: UIViewController {
         }
     }
     
+    // Backspace button to remove last item on display
+    @IBAction func backspace(sender: UIButton) {
+        if userIsInTheMiddleofTypingANumber {
+            let displayText = display.text!
+            if count(displayText) > 1 {
+                if count(displayText) == 2 {
+                    if (display.text!.rangeOfString(".") != nil) {
+                        display.text = "0"
+                        userIsInTheMiddleofTypingANumber = false
+                    }
+                }
+                display.text = dropLast(displayText)
+            } else {
+                display.text = "0"
+                userIsInTheMiddleofTypingANumber = false
+            }
+        }
+    }
+
     // Enter button to be pressed after each digit
     @IBAction func enter() {
         userIsInTheMiddleofTypingANumber = false
