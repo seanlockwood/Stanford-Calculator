@@ -53,6 +53,7 @@ class CalculatorBrain
         learnOp(Op.UnaryOperation("√", sqrt))
         learnOp(Op.UnaryOperation("sin", sin))
         learnOp(Op.UnaryOperation("cos", cos))
+        learnOp(Op.UnaryOperation("±", { -$0 }))
         learnOp(Op.Constant("∏", { M_PI }))
     }
     

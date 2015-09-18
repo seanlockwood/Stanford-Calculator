@@ -27,7 +27,16 @@ class ViewController: UIViewController {
         let digit = sender.currentTitle!
         if userIsInTheMiddleofTypingANumber {
             if (digit == ".") && (display.text!.rangeOfString(".") != nil) { return }
-            display.text = display.text! + digit
+            if (digit == "0") && ((display.text == "0") || (display.text == "-0")) { return }
+            if (digit != ".") && ((display.text == "0") || (display.text == "-0")) {
+                if (display.text == "0") {
+                    display.text = digit
+                } else {
+                    display.text = "-" + digit
+                }
+            } else {
+                display.text = display.text! + digit
+            }
         } else {
             if digit == "." {
                 display.text = "0."
@@ -35,6 +44,7 @@ class ViewController: UIViewController {
                 display.text = digit
             }
             userIsInTheMiddleofTypingANumber = true
+            history.text = brain.history()
         }
     }
 
@@ -57,6 +67,7 @@ class ViewController: UIViewController {
                 displayValue = 0
             }
         }
+        history.text = history.text! + "="
     }
     
     // Backspace button to remove last item on display
